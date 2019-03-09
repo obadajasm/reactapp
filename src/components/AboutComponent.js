@@ -1,33 +1,43 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader,Media } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-
-function Renderleaders({leader}) {
+function Renderleaders({item}) {
 
     return(
-        <div className="container">
+        
         <div className="row col-12 col-md-10">
          <Media className='list-content'> 
   <Media className="my_image">
-  <img src={leader.image} alt ={leader.name}/>
+  <img src={item.image} alt ={item.name}/>
   </Media>
    <Media body>
      <Media heading>
- <h2>    {leader.name}</h2>
+ <h2>    {item.name}</h2>
      </Media>
-  <h4>  {leader.designation}</h4> 
+  <h4>  {item.designation}</h4> 
           
-    <p> {leader.description}</p>
+    <p> {item.description}</p>
    </Media>
  </Media> 
  </div>
- </div>
+
     );
 }
+function About(props) {
 
+    const leaders = props.leaders.map((leader) => {
+        return (
+            <div className="container">
+            <div className="row align-items-start">
+                <div className="col-12 col-md m-1">
+                    <Renderleaders item={leader} />
+                    </div>
+                    </div>
+                    </div>
+        );
+    });
 
-function About(props) {    
     return(
         <div className="container">
             <div className="row">
@@ -80,15 +90,13 @@ function About(props) {
             </div>
             <div className="row row-content">
                 <div className="col-12">
-                    <h1>Corporate Leadership</h1>
+                    <h2>Corporate Leadership</h2>
                 </div>
-                <div className="container">
-        <div className="row align-items-start">
-            <div className="col-12 col-md m-1">
-                <Renderleaders leader={props.leader} />
-            </div>
-            </div>
-            </div>
+                <div className="col-12">
+                    <Media list>
+                        {leaders}
+                    </Media>
+                </div>
             </div>
         </div>
     );
